@@ -1,13 +1,11 @@
-var Battledome = (function(OldBattledome) {
-/*
-  TODO: Modularize this code with IIFE or Browserify
- */
-OldBattledome.Combatants = {};
+var Battledome = (function() {
+
+Battledome.Combatants = {};
 /*
   Define the base object for any player of Battledome,
   whether a human player or a Enemy.
  */
-OldBattledome.Combatants.Player = function(name) {
+Battledome.Combatants.Player = function(name) {
   this.type = null;
   this.class = null;
   this.weapon = null;
@@ -36,47 +34,79 @@ OldBattledome.Combatants.Player = function(name) {
   };
 };
 
-OldBattledome.Combatants.Player.prototype.setWeapon = function(newWeapon) {
+Battledome.Combatants.Player.prototype.setWeapon = function(newWeapon) {
   if (newWeapon === "Class-Surprise-Me" || newWeapon === undefined) {
     this.weapon = PlayerOne.generateWeapon();
   }
   else {
-  this.weapon = new OldBattledome.WeaponsCase[newWeapon]();
+  this.weapon = new Battledome.WeaponsCase[newWeapon]();
   }
 }
-OldBattledome.Combatants.Player.prototype.generateWeapon = function() {
+Battledome.Combatants.Player.prototype.generateWeapon = function() {
   var random = Math.round(Math.random() * (this.allowedWeapons.length - 1));
   var randomWeapon = this.allowedWeapons[random];
-  this.weapon = new OldBattledome.WeaponsCase[randomWeapon]();
+  this.weapon = new Battledome.WeaponsCase[randomWeapon]();
   return this.weapon;
 };
 
-OldBattledome.Combatants.Player.prototype.setClass = function(newClass) {
+Battledome.Combatants.Player.prototype.setClass = function(newClass) {
   if (newClass === "Class-Surprise-Me" || newClass === undefined) {
     this.class = PlayerOne.generateClass();
   }
   else {
-  this.class = new OldBattledome.GuildHall[newClass]();
+  this.class = new Battledome.RobotGarage[newClass]();
   }
 }
 
-OldBattledome.Combatants.Player.prototype.generateClass = function() {
+Battledome.Combatants.Player.prototype.generateClass = function() {
   var random = Math.round(Math.random() * (this.allowedClasses.length - 1));
   var randomClass = this.allowedClasses[random];
-  this.class = new OldBattledome.GuildHall[randomClass]();
+  this.class = new Battledome.RobotGarage[randomClass]();
   this.health += this.class.healthBonus;
   return this.class;
 };
 
 
-OldBattledome.Combatants.Enemy = function() {
+Battledome.Combatants.Enemy = function() {
   this.health = this.health - 30;
   this.intelligence = this.intelligence -20;
   this.strength = this.strength + 30;
-    this.allowedWeapons = ["Dagger", "WarAxe", "BroadSword"];
+    this.allowedWeapons = ["BuzzSaw", "Laser", "Flamethrower"];
 };
-OldBattledome.Combatants.Enemy.prototype = new OldBattledome.Combatants.Player();
+Battledome.Combatants.Enemy.prototype = new Battledome.Combatants.Player();
 
-return OldBattledome;
+/*ROBOT CLASSES*/
+Battledome.RobotGarage.Robot = function() {
+  this.healthBonus = 20;
+  this.strengthBonus = 10;
+};
+Battledome.RobotGarage.Robot.prototype = new Battledome.RobotGarage.PlayerClass();
+
+Battledome.RobotGarage.Drone = function() {
+  this.name = "Drone";
+  this.image = "/images/class-warrior.png";
+  this.healthBonus = this.healthBonus + 25;
+  this.strengthBonus = this.strengthBonus + 30;
+};
+Battledome.RobotGarage.Flying.prototype = new Battledome.RobotGarage.Robot();
+
+Battledome.RobotGarage.Flying = function() {
+  this.name = "Flying";
+  this.image = "/images/class-warrior.png";
+  this.healthBonus = this.healthBonus + 25;
+  this.strengthBonus = this.strengthBonus + 30;
+};
+Battledome.RobotGarage.Flying.prototype = new Battledome.RobotGarage.Robot();
+
+Battledome.RobotGarage.Atv = function() {
+  this.name = "ATV";
+  this.image = "/images/Richelle1.jpg";
+  this.healthBonus = this.healthBonus + 20;
+  this.strengthBonus = this.strengthBonus + 10;
+};
+Battledome.RobotGarage.Atv.prototype = new Battledome.RobotGarage.Robot();
+
+
+return Battledome;
 
 })(Battledome || {});

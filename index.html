@@ -3,9 +3,57 @@
 <head>
   <meta charset="UTF-8">
   <title>Modern JS Quiz</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 </head>
 <body>
-hi
+<article id="game-container">
+         <div id="player-setup" class="card card--name col-md-6">
+            <div class="card__prompt">
+               <div>RECORD YOUR BOT'S NAME <br/>PLAYER 1</div>
+               <div class="field">
+                  <input type="text" autofocus="true" val="PlayerOne" id="player-name" class="field__textinput">
+            <div class="dropdown">
+              <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                Select your Bot!
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li><a href="#">Tank Drone</a></li>
+                <li><a href="#">Raptor Drone</a></li>
+                <li><a href="#">Predator Drone</a></li>
+                <li><a href="#">Attack Jet Drone</a></li>
+                <li><a href="#">Aquatic Drone</a></li>
+                <li><a href="#">Laser ATV Drone</a></li>
+              </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+          <div id="player-setup" class="card card--name col-md-6">
+            <div class="card__prompt">
+               <div>RECORD ENEMY BOT'S NAME <br/>PLAYER 2</div>
+               <div class="field">
+                  <input type="text" autofocus="true" val="PlayerTwo" id="player2-name" class="field__textinput">
+              <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                      Select your Bot!
+                      <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                      <li><a href="#">Tank Drone</a></li>
+                      <li><a href="#">Raptor Drone</a></li>
+                      <li><a href="#">Predator Drone</a></li>
+                      <li><a href="#">Attack Jet Drone</a></li>
+                      <li><a href="#">Aquatic Drone</a></li>
+                      <li><a href="#">Laser ATV Drone</a></li>
+                    </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        
+  <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   <script src="/javascripts/main.js" type="text/javascript" charset="utf-8" async defer></script>
 </body>
 </html>
