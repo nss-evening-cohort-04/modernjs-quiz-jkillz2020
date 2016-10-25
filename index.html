@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Modern JS Quiz</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="main.css">
 </head>
 <body>
 <article id="game-container">
@@ -18,12 +19,12 @@
                 <span class="caret"></span>
               </button>
               <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li><a href="#">Predator</a></li>
+                <li><a href="#">Jet</a></li>
                 <li><a href="#">Tank Drone</a></li>
-                <li><a href="#">Raptor Drone</a></li>
-                <li><a href="#">Predator Drone</a></li>
-                <li><a href="#">Attack Jet Drone</a></li>
-                <li><a href="#">Aquatic Drone</a></li>
-                <li><a href="#">Laser ATV Drone</a></li>
+                <li><a href="#">Raptor</a></li>
+                <li><a href="#">Hulk</a></li>
+                <li><a href="#">Bigfoot</a></li>
               </ul>
           </div>
         </div>
@@ -40,17 +41,18 @@
                       <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                      <li><a href="#">Tank Drone</a></li>
-                      <li><a href="#">Raptor Drone</a></li>
-                      <li><a href="#">Predator Drone</a></li>
-                      <li><a href="#">Attack Jet Drone</a></li>
-                      <li><a href="#">Aquatic Drone</a></li>
-                      <li><a href="#">Laser ATV Drone</a></li>
+                      <li id="tank"><a href="#">Tank Drone</a></li>
+                      <li id="raptor"><a href="#">Raptor Drone</a></li>
+                      <li id="predator"><a href="#">Predator Drone</a></li>
+                      <li id="jet"><a href="#">Attack Jet Drone</a></li>
+                      <li id="aquatic"><a href="#">Aquatic Drone</a></li>
+                      <li id="atv"><a href="#">Laser ATV Drone</a></li>
                     </ul>
                 </div>
               </div>
             </div>
           </div>
+          <div class="row"><button type="button" class="btn btn-default col-md-4 col-offset-4">Attack!</button></div>
         
   <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>

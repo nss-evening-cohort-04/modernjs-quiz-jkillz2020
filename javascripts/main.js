@@ -1,112 +1,147 @@
-var Battledome = (function() {
+"use strict";
+let Battledome = {};
+let PlayerOne;
+let PlayerClass;
+let PlayerWeapon;
+let ComputerEnemy;
+let GameOver = false;
+let PlayerOneAlive = true;
+let PlayerTwoAlive = true;
 
-Battledome.Combatants = {};
+//Battledome.Combatants = {};
+Battledome.RobotGarage = {};
 /*
-  Define the base object for any player of Battledome,
-  whether a human player or a Enemy.
+  ROBOT WARS
  */
-Battledome.Combatants.Player = function(name) {
-  this.type = null;
-  this.class = null;
+// WEAPONS //
+let Gun = () => {
+  this.damage = 1000;
+};
+
+let Flamethrower = () => {
+  this.damage = 4000;
+};
+
+let Bubbles = () => {
+  this.damage = 10000;
+};
+
+let ThorHammer = () => {
+  this.damage = 5000;
+};
+
+let Lazer = () => {
+  this.damage = 5200;
+};
+
+let Buzzsaw = () => {
+  this.damage = 6800;
+};
+
+// var realSum2 = (num1, num2)=> {
+//   return num1 + num2;
+// }
+// console.log("realsum ES6", realSum(4,5));
+
+let Robot = () => {
+  this.baseDamage = Math.floor(Math.random() * 10);
+  this.life = 500;
   this.weapon = null;
-  this.image = null;
-
-  this.playerName = name || "unknown robot";
-  this.health = Math.floor(Math.random() * 40 + 50);
-  this.healthBonus = 0;
-  this.strength = 90;
-  this.intelligence = 90;
-
-  this.toString = function() {
-    var output = [this.playerName,
-      ": a ",
-      this.type,
-      " ",
-      this.class,
-      " with ",
-      this.health,
-      " health. ",
-      (this.class.ability) ? "Able to cast " : " Wielding a ",
-      this.weapon.toString(),
-      "!"
-    ].join("");
-    return output;
-  };
+  this.totalLife = 0;
 };
 
-Battledome.Combatants.Player.prototype.setWeapon = function(newWeapon) {
-  if (newWeapon === "Class-Surprise-Me" || newWeapon === undefined) {
-    this.weapon = PlayerOne.generateWeapon();
-  }
-  else {
-  this.weapon = new Battledome.WeaponsCase[newWeapon]();
-  }
+Robot.prototype.attack = function (target) {
+  this.totalDamage = this.baseDamage + this.weapon.damage;
+  target.life -= this.totalDamage;
+};
+
+Robot.prototype.health = function () {
+  this.totalLife = this.life + this.bonusLife;
+};
+
+function AerialDrone () {
+  this.type = "Drone";
+  this.attackType = "Aerial";
 }
-Battledome.Combatants.Player.prototype.generateWeapon = function() {
-  var random = Math.round(Math.random() * (this.allowedWeapons.length - 1));
-  var randomWeapon = this.allowedWeapons[random];
-  this.weapon = new Battledome.WeaponsCase[randomWeapon]();
-  return this.weapon;
+AerialDrone.prototype = new Robot();
+
+function PredatorDrone () {
+  this.baseDamage += 10;
+  this.bonusLife = Math.floor(Math.random() * 10);
+}
+PredatorDrone.prototype = new AerialDrone();
+
+function JetDrone () {
+  this.baseDamage += 20;
+  this.bonusLife = Math.floor(Math.random() * 15);
+}
+JetDrone.prototype = new AerialDrone();
+
+function GroundRobot () {
+  this.attackType = "Earth Bound";
+}
+GroundRobot.prototype = new Robot();
+
+function TankDrone () {
+  this.type = "Tank";
+  this.baseDamage += 5;
+  this.bonusLife = Math.floor(Math.random() * 20);
+}
+TankDrone.prototype = new GroundRobot();
+
+function Raptor () {
+  this.type = "FireBreather";
+  this.baseDamage += 200;
+  this.bonusLife = Math.floor(Math.random() * 18);
+}
+Raptor.prototype = new GroundRobot();
+
+function AtvRobot () {
+  this.attackType = "All Terrain";
+}
+function Hulk () {
+  this.baseDamage += 145;
+  this.bonusLife = Math.floor(Math.random() * 25);
+}
+Hulk.prototype = new AtvRobot();
+
+function BigFoot () {
+  this.baseDamage += 115;
+  BigFoot.weapon = new Buzzsaw();
+  this.bonusLife = Math.floor(Math.random() * 30);
+}
+BigFoot.prototype = new AtvRobot();
+
+
+let raptor = new Raptor();
+raptor.weapon = new Bubbles();
+console.log("raptor", raptor.life);
+
+// var smaug = new Dragon();
+// smaug.weapon = new Flamethrower();
+// smaug.attack(raptor);
+// console.log("raptor", raptor.life);
+// 
+let setPlayer = (robotSelected) => {
+
 };
 
-Battledome.Combatants.Player.prototype.setClass = function(newClass) {
-  if (newClass === "Class-Surprise-Me" || newClass === undefined) {
-    this.class = PlayerOne.generateClass();
-  }
-  else {
-  this.class = new Battledome.RobotGarage[newClass]();
-  }
+function Battleground () {
+
 }
 
-Battledome.Combatants.Player.prototype.generateClass = function() {
-  var random = Math.round(Math.random() * (this.allowedClasses.length - 1));
-  var randomClass = this.allowedClasses[random];
-  this.class = new Battledome.RobotGarage[randomClass]();
-  this.health += this.class.healthBonus;
-  return this.class;
-};
+// A base Robot function. DONE
+// Define three robot type functions (e.g. Drone, Bipedal, ATV). DONE
+// Each type must have a unique property, for example, if it is aerial or ground based. DONE
+// Define at least 2 specific robot model functions for each type.  DONE
+// Give each robot model a different range of health. For example, one model can have health range of 50-80, 
+// and another one will have a range of 60-120. 
+// To accomplish this, read about the Math.random() function in JavaScript. DONE
+// Give each robot model a different range of damage they do using the same technique.  DONE
+// Functional Requirements
 
-
-Battledome.Combatants.Enemy = function() {
-  this.health = this.health - 30;
-  this.intelligence = this.intelligence -20;
-  this.strength = this.strength + 30;
-    this.allowedWeapons = ["BuzzSaw", "Laser", "Flamethrower"];
-};
-Battledome.Combatants.Enemy.prototype = new Battledome.Combatants.Player();
-
-/*ROBOT CLASSES*/
-Battledome.RobotGarage.Robot = function() {
-  this.healthBonus = 20;
-  this.strengthBonus = 10;
-};
-Battledome.RobotGarage.Robot.prototype = new Battledome.RobotGarage.PlayerClass();
-
-Battledome.RobotGarage.Drone = function() {
-  this.name = "Drone";
-  this.image = "/images/class-warrior.png";
-  this.healthBonus = this.healthBonus + 25;
-  this.strengthBonus = this.strengthBonus + 30;
-};
-Battledome.RobotGarage.Flying.prototype = new Battledome.RobotGarage.Robot();
-
-Battledome.RobotGarage.Flying = function() {
-  this.name = "Flying";
-  this.image = "/images/class-warrior.png";
-  this.healthBonus = this.healthBonus + 25;
-  this.strengthBonus = this.strengthBonus + 30;
-};
-Battledome.RobotGarage.Flying.prototype = new Battledome.RobotGarage.Robot();
-
-Battledome.RobotGarage.Atv = function() {
-  this.name = "ATV";
-  this.image = "/images/Richelle1.jpg";
-  this.healthBonus = this.healthBonus + 20;
-  this.strengthBonus = this.strengthBonus + 10;
-};
-Battledome.RobotGarage.Atv.prototype = new Battledome.RobotGarage.Robot();
-
-
-return Battledome;
-
-})(Battledome || {});
+// When your user interface first loads, provide 2 text inputs to name the two robots that will do battle.
+// You must also provide a select element underneath each text input so that the user can select one of the 6 robot models you defined.
+// Provide a Attack! button that, when clicked, simply applies the damage output of each robot against the other one.
+// Once either robot's health is <0 display a message that the battle is over, and which one won. For example...
+// The Viper Drone defeated the Behemoth ATV with its flamethrower.
