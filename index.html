@@ -8,51 +8,29 @@
 </head>
 <body>
 <article id="game-container">
-         <div id="player-setup" class="card card--name col-md-6">
+         <div id="player-setup" class="card card--name col-md-4 col-md-offset-3">
             <div class="card__prompt">
                <div>RECORD YOUR BOT'S NAME <br/>PLAYER 1</div>
                <div class="field">
-                  <input type="text" autofocus="true" val="PlayerOne" id="player-name" class="field__textinput">
-            <div class="dropdown">
-              <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                Select your Bot!
-                <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                <li><a href="#">Predator</a></li>
-                <li><a href="#">Jet</a></li>
-                <li><a href="#">Tank Drone</a></li>
-                <li><a href="#">Raptor</a></li>
-                <li><a href="#">Hulk</a></li>
-                <li><a href="#">Bigfoot</a></li>
-              </ul>
+                  <input type="text" autofocus="true" val="PlayerOne" id="player-one-name" class="field__textinput">
+            <div id="player-one-bot-select">
+                
+            </div>
           </div>
-        </div>
       </div>
     </div>
-          <div id="player-setup" class="card card--name col-md-6">
+          <div id="player-setup" class="card card--name col-md-4">
             <div class="card__prompt">
                <div>RECORD ENEMY BOT'S NAME <br/>PLAYER 2</div>
                <div class="field">
-                  <input type="text" autofocus="true" val="PlayerTwo" id="player2-name" class="field__textinput">
-              <div class="dropdown">
-                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                      Select your Bot!
-                      <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                      <li id="tank"><a href="#">Tank Drone</a></li>
-                      <li id="raptor"><a href="#">Raptor Drone</a></li>
-                      <li id="predator"><a href="#">Predator Drone</a></li>
-                      <li id="jet"><a href="#">Attack Jet Drone</a></li>
-                      <li id="aquatic"><a href="#">Aquatic Drone</a></li>
-                      <li id="atv"><a href="#">Laser ATV Drone</a></li>
-                    </ul>
-                </div>
+                  <input type="text" autofocus="true" val="PlayerTwo" id="player-two-name" class="field__textinput">
+              <div id="player-two-bot-select">
+                
               </div>
             </div>
           </div>
-          <div class="row"><button type="button" class="btn btn-default col-md-4 col-offset-4">Attack!</button></div>
+        </div>
+          <div class="row"><button type="button" class="btn btn-danger col-md-4 col-md-offset-4 btn-space"id="attack-button">Attack!</button></div>
         
   <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>

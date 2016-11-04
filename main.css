@@ -1,4 +1,9 @@
-.center{
+/*.center{
   text-align: center;
   display: inline-block;
+}*/
+
+.btn-space{
+  margin-top: 20px;
+  margin-left: 33%;
 }
