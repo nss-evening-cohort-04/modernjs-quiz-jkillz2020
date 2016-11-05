@@ -12,29 +12,39 @@ let PlayerTwoAlive = true;
   ROBOT WARS
  */
 // WEAPONS //
-let Gun = function() {
+function Weapon () {
+
+}
+
+function Gun () {
   this.damage = 1000;
-};
+}
+  Gun.prototype = new Weapon();
 
-let Flamethrower = function() {
+function Flamethrower () {
   this.damage = 4000;
-};
+}
+  Flamethrower.prototype = new Weapon();
 
-let Bubbles = function() {
+function Bubbles () {
   this.damage = 10000;
-};
+}
+  Bubbles.prototype = new Weapon();
 
-let ThorHammer = function() {
+function ThorHammer () {
   this.damage = 5000;
-};
+}
+  ThorHammer.prototype = new Weapon();
 
-let Lazer = function() {
-  this.damage = 5200;
-};
+function Lazer () {
+  this.damage = 6500;
+}
+  Lazer.prototype = new Weapon();
 
-let Buzzsaw = function() {
+function Buzzsaw () {
   this.damage = 6800;
-};
+}
+  Buzzsaw.prototype = new Weapon();
 
 // var realSum2 = (num1, num2)=> {
 //   return num1 + num2;
@@ -46,12 +56,13 @@ let Buzzsaw = function() {
     this.life = 500;
     this.weapon = null;
     this.totalLife = 0;
+    this.name = '';
   }
 
   
 
   Robot.prototype.health = function () {
-    this.totalLife = this.life + this.bonusLife;
+    this.totalLife = this.life + this.totalLife;
   };
 
   function AerialDrone () {
@@ -62,13 +73,13 @@ let Buzzsaw = function() {
 
   function PredatorDrone () {
     this.baseDamage += 10;
-    this.bonusLife = Math.floor(Math.random() * 10);
+    this.totalLife = Math.floor(Math.random() * 10);
   }
   PredatorDrone.prototype = new AerialDrone();
 
   function JetDrone () {
     this.baseDamage += 20;
-    this.bonusLife = Math.floor(Math.random() * 15) + this.life;
+    this.totalLife = Math.floor(Math.random() * 15) + this.life;
   }
   JetDrone.prototype = new AerialDrone();
 
@@ -80,14 +91,14 @@ let Buzzsaw = function() {
   function TankDrone () {
     this.type = "Tank";
     this.baseDamage += 5;
-    this.bonusLife = Math.floor(Math.random() * 20) + this.life;
+    this.totalLife = Math.floor(Math.random() * 20) + this.life;
   }
   TankDrone.prototype = new GroundRobot();
 
   function Raptor () {
     this.type = "FireBreather";
     this.baseDamage += 200;
-    this.bonusLife = Math.floor(Math.random() * 18) + this.life;
+    this.totalLife = Math.floor(Math.random() * 18) + this.life;
   }
   Raptor.prototype = new GroundRobot();
 
@@ -98,14 +109,14 @@ let Buzzsaw = function() {
 
   function Hulk () {
     this.baseDamage += 145;
-    this.bonusLife = Math.floor(Math.random() * 25) + this.life;
+    this.totalLife = Math.floor(Math.random() * 25) + this.life;
   }
   Hulk.prototype = new AtvRobot();
 
   function BigFoot () {
     this.baseDamage += 115;
     BigFoot.weapon = new Buzzsaw();
-    this.bonusLife = Math.floor(Math.random() * 30) + this.life;
+    this.totalLife = Math.floor(Math.random() * 30) + this.life;
   }
   BigFoot.prototype = new AtvRobot();
   // console.log("bigfoot", Bigfoot.life);
@@ -113,7 +124,8 @@ let Buzzsaw = function() {
 
   console.log("raptor", Raptor);
   // Raptor.weapon = new Bubbles();
-  console.log("bigfoot", BigFoot.bonusLife);
+  var newBigfoot = new BigFoot();
+  console.log("bigfoot", newBigfoot.totalLife);
 
   //var bigfoot = new BigFoot();
   //console.log("bigfoot", bigfoot);
@@ -127,7 +139,7 @@ let Buzzsaw = function() {
   // };
   ///put robots in select list////
   function putRobotsToDom(){
-  let robotPicker = '<select class="selectpicker">';
+  let robotPicker = '<select class="selectpicker player-picker">';
           robotPicker+='<option selected disabled>Select Robot</option>';
           robotPicker+='<option>Raptor</option>';
           robotPicker+='<option>Bigfoot</option>';
@@ -141,6 +153,31 @@ let Buzzsaw = function() {
   }
   putRobotsToDom();
 
+function putWeaponsToDom(){
+  let weaponPicker = '<select class="selectpicker weapon-picker hide" id="player-one-weapon-picker">';
+          weaponPicker+='<option selected disabled>Select Weapon</option>';
+          weaponPicker+='<option>Gun</option>';
+          weaponPicker+='<option>Bubbles</option>';
+          weaponPicker+='<option>Thor Hammer</option>';
+          weaponPicker+='<option>Lazer</option>';
+          weaponPicker+='<option>Buzzsaw</option>';
+          weaponPicker+='</select>';
+    $('#player-one-bot-select').append(weaponPicker);
+  }
+  putWeaponsToDom();
+  function putWeaponsToDom2(){
+  let weaponPicker = '<select class="selectpicker weapon-picker hide" id="player-two-weapon-picker">';
+          weaponPicker+='<option selected disabled>Select Weapon</option>';
+          weaponPicker+='<option>Gun</option>';
+          weaponPicker+='<option>Bubbles</option>';
+          weaponPicker+='<option>Thor Hammer</option>';
+          weaponPicker+='<option>Lazer</option>';
+          weaponPicker+='<option>Buzzsaw</option>';
+          weaponPicker+='</select>';
+    $('#player-two-bot-select').append(weaponPicker);
+  }
+  putWeaponsToDom2();
+
   Battledome.PlayerOne = {};
   Battledome.PlayerTwo = {};
 
@@ -148,97 +185,96 @@ let Buzzsaw = function() {
 
   //Players select robot//
   $('#player-one-bot-type').on('click', function(){
+    if ($('.selectpicker',$(this).parent()).val() === null) {
+      alert("Please select a Robot!");
+      return;
+    }
+    if ($("#player-one-name").val() === "" ) {
+      alert("Please enter a name!");
+      return;
+    }
+    console.log($('.selectpicker',$(this).parent()).val());
+    
   let PlayerOne = $("#player-one-name").val();
     if(
       $('.selectpicker',$(this).parent()).val() === "Raptor"){
          Battledome.PlayerOne =  {
           name: PlayerOne,
-          robot:new Raptor()
+          robot:new Raptor(),
+          health: this.totalLife
         };
     }
     else if(
       $('.selectpicker',$(this).parent()).val() === "Bigfoot"){
          Battledome.PlayerOne =  {
           name: PlayerOne,
-          robot:new BigFoot()
+          robot:new BigFoot(),
+          health: this.totalLife
         };
       }
     else if(
       $('.selectpicker',$(this).parent()).val() === "Hulk"){
          Battledome.PlayerOne =  {
           name: PlayerOne,
-          robot:new Hulk()
+          robot:new Hulk(),
+          health: this.totalLife
         };
       }
     else if(
       $('.selectpicker',$(this).parent()).val() === "Tank Drone"){
          Battledome.PlayerOne =  {
           name: PlayerOne,
-          robot:new TankDrone()
+          robot:new TankDrone(),
+          health: this.totalLife
         };
       }
     else if(
       $('.selectpicker',$(this).parent()).val() === "Predator Drone"){
          Battledome.PlayerOne =  {
           name: PlayerOne,
-          robot:new PredatorDrone()
+          robot:new PredatorDrone(),
+          health: this.totalLife
         };
       }
     else if(
       $('.selectpicker',$(this).parent()).val() === "Jet Drone"){
          Battledome.PlayerOne =  {
           name: PlayerOne,
-          robot:new JetDrone()
+          robot:new JetDrone(),
+          health: this.totalLife
         };
   }
+  $('.selectpicker',$(this).parent()).addClass("hide");
+  $('#player-one-weapon-picker').removeClass("hide");
   $('#player-one-battle-area').append($('.selectpicker',$(this).parent()).val());
   });
 
   $('#player-two-bot-type').on('click', function(){
-    let PlayerTwo = $("#player-two-name").val();
-    if(
-      $('.selectpicker',$(this).parent()).val() === "Raptor"){
-         Battledome.PlayerTwo =  {
-          name: PlayerTwo,
-          robot:new Raptor()
-        };
+    let playerTwoName = $("#player-two-name").val();
+    if($('.selectpicker',$(this).parent()).val() === "Raptor"){
+      Battledome.PlayerTwo =  new Raptor();
     }
-    else if(
-      $('.selectpicker',$(this).parent()).val() === "Bigfoot"){
-         Battledome.PlayerTwo =  {
-          name: PlayerTwo,
-          robot:new BigFoot()
-        };
-      }
-    else if(
-      $('.selectpicker',$(this).parent()).val() === "Hulk"){
-         Battledome.PlayerTwo =  {
-          name: PlayerTwo,
-          robot:new Hulk()
-        };
-      }
-    else if(
-      $('.selectpicker',$(this).parent()).val() === "Tank Drone"){
-         Battledome.PlayerTwo =  {
-          name: PlayerTwo,
-          robot:new TankDrone()
-        };
-      }
-    else if(
-      $('.selectpicker',$(this).parent()).val() === "Predator Drone"){
-         Battledome.PlayerTwo =  {
-          name: PlayerTwo,
-          robot:new PredatorDrone()
-        };
-      }
-    else if(
-      $('.selectpicker',$(this).parent()).val() === "Jet Drone"){
-         Battledome.PlayerTwo =  {
-          name: PlayerTwo,
-          robot:new JetDrone()
-        };
-  }
-  $('#player-two-battle-area').append($('.selectpicker',$(this).parent()).val());
+    else if($('.selectpicker',$(this).parent()).val() === "Bigfoot"){
+      Battledome.PlayerTwo = new BigFoot();
+    }
+    else if($('.selectpicker',$(this).parent()).val() === "Hulk"){
+      Battledome.PlayerTwo = new Hulk();
+    }
+    else if($('.selectpicker',$(this).parent()).val() === "Tank Drone"){
+      Battledome.PlayerTwo =  new TankDrone();
+    }
+    else if($('.selectpicker',$(this).parent()).val() === "Predator Drone"){
+      Battledome.PlayerTwo =  new PredatorDrone();
+    }
+    else if($('.selectpicker',$(this).parent()).val() === "Jet Drone"){
+      Battledome.PlayerTwo =  new JetDrone();
+    }
+
+    Battledome.PlayerTwo.name = playerTwoName;
+    $('.selectpicker',$(this).parent()).addClass("hide");
+    $('#player-two-weapon-picker').removeClass("hide");
+    $('#player-two-battle-area').append($('.selectpicker',$(this).parent()).val());
+    console.log("playerTwo",Battledome.PlayerTwo);
   });
 
 
