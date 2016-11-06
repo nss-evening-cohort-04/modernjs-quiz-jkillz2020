@@ -6,8 +6,16 @@
 .btn-space{
   margin-top: 20px;
   margin-left: 33%;
+  margin-bottom: 30px;
 }
 
 .hide{
   display: none;
+}
+
+#winner-display{
+  margin-left: 40%;
+  text-decoration: bold;
+  font-size: 20px;
+  color: red;
 }

@@ -53,7 +53,7 @@ function Buzzsaw () {
 
   function Robot () {
     this.baseDamage = Math.floor(Math.random() * 10);
-    this.life = 500;
+    this.life = 15000;
     this.weapon = null;
     this.totalLife = 0;
     this.name = '';
@@ -319,14 +319,15 @@ function putWeaponsToDom(){
   $("#attack-button").on('click', function(){
     Battledome.PlayerOne.health = (Battledome.PlayerOne.Robot.totalLife - Battledome.PlayerTwo.Weapon.damage);
         if (Battledome.PlayerOne.health - Battledome.PlayerTwo.Weapon.damage <= 0) {
-                alert("Player One Died!");
+              $("#winner-display").append("Player One Died!");
         }
         //$("#player-one-health").html("Health " + (PlayerOne.health - PlayerTwo.weapon.damage));
       //Player Two//
         Battledome.PlayerTwo.health = (Battledome.PlayerTwo.Robot.totalLife - Battledome.PlayerOne.Weapon.damage);
         if (Battledome.PlayerTwo.health - Battledome.PlayerOne.Weapon.damage <= 0) {
-                alert("Player Two Died!");
+              $("#winner-display").append("Player Two Died!");
         }
+        // else return
         // $("#player-two-health").html("Health " + (PlayerTwo.health - PlayerOne.weapon.damage));
     });
 });
