@@ -318,13 +318,13 @@ function putWeaponsToDom(){
 
   $("#attack-button").on('click', function(){
     Battledome.PlayerOne.health = (Battledome.PlayerOne.Robot.totalLife - Battledome.PlayerTwo.Weapon.damage);
-        if (Battledome.PlayerOne.health - Battledome.PlayerTwo.weapon.damage <= 0) {
+        if (Battledome.PlayerOne.health - Battledome.PlayerTwo.Weapon.damage <= 0) {
                 alert("Player One Died!");
         }
         //$("#player-one-health").html("Health " + (PlayerOne.health - PlayerTwo.weapon.damage));
       //Player Two//
-        Battledome.playerTwo.health = (Battledome.PlayerTwo.Robot.totalLife - Battledome.PlayerOne.weapon.damage);
-        if (Battledome.playerTwo.health - Battledome.PlayerOne.weapon.damage <= 0) {
+        Battledome.PlayerTwo.health = (Battledome.PlayerTwo.Robot.totalLife - Battledome.PlayerOne.Weapon.damage);
+        if (Battledome.PlayerTwo.health - Battledome.PlayerOne.Weapon.damage <= 0) {
                 alert("Player Two Died!");
         }
         // $("#player-two-health").html("Health " + (PlayerTwo.health - PlayerOne.weapon.damage));
