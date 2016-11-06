@@ -1,13 +1,10 @@
 "use strict";
 $(document).ready(function(){
-console.log("jquery ready");
 let Battledome = {};
 let GameOver = false;
 let PlayerOneAlive = true;
 let PlayerTwoAlive = true;
 
-//Battledome.Combatants = {};
-//Battledome.RobotGarage = {};
 /*
   ROBOT WARS
  */
@@ -46,10 +43,7 @@ function Buzzsaw () {
 }
   Buzzsaw.prototype = new Weapon();
 
-// var realSum2 = (num1, num2)=> {
-//   return num1 + num2;
-// }
-// console.log("realsum ES6", realSum(4,5));
+//BASE ROBOT //
 
   function Robot () {
     this.baseDamage = Math.floor(Math.random() * 10);
@@ -58,12 +52,12 @@ function Buzzsaw () {
     this.totalLife = 0;
     this.name = '';
   }
-
-  
-
+//ROBOT HEALTH
   Robot.prototype.health = function () {
     this.totalLife = this.life + this.totalLife;
   };
+
+//ROBOT TYPES//
 
   function AerialDrone () {
     this.type = "Drone";
@@ -119,25 +113,8 @@ function Buzzsaw () {
     this.totalLife = Math.floor(Math.random() * 30) + this.life;
   }
   BigFoot.prototype = new AtvRobot();
-  // console.log("bigfoot", Bigfoot.life);
-
-
-  console.log("raptor", Raptor);
-  // Raptor.weapon = new Bubbles();
-  var newBigfoot = new BigFoot();
-  console.log("bigfoot", newBigfoot.totalLife);
-
-  //var bigfoot = new BigFoot();
-  //console.log("bigfoot", bigfoot);
-
-  // bigfoot.weapon = new Flamethrower();
-  // bigfoot.attack(raptor);
-  // console.log("raptor", raptor.life);
-  // 
-  // let playerRobot = (robotSelected) => {
-
-  // };
-  ///put robots in select list////
+    
+  ///ROBOT SELECT ELEMENTS////
   function putRobotsToDom(){
   let robotPicker = '<select class="selectpicker player-picker">';
           robotPicker+='<option selected disabled>Select Robot</option>';
@@ -152,7 +129,7 @@ function Buzzsaw () {
   $('#player-two-bot-select').append(robotPicker);
   }
   putRobotsToDom();
-
+//WEAPON SELECT ELEMENTS
 function putWeaponsToDom(){
   let weaponPicker = '<select class="selectpicker weapon-picker hide" id="player-one-weapon-picker">';
           weaponPicker+='<option selected disabled>Select Weapon</option>';
@@ -165,6 +142,7 @@ function putWeaponsToDom(){
           weaponPicker+='<button class="hide" id="player-one-weapon-btn">Select Weapon</button>';
     $('#player-one-bot-select').append(weaponPicker);
   }
+
   putWeaponsToDom();
   function putWeaponsToDom2(){
   let weaponPicker = '<select class="selectpicker weapon-picker hide" id="player-two-weapon-picker">';
@@ -180,12 +158,12 @@ function putWeaponsToDom(){
   }
   putWeaponsToDom2();
 
+//PLAYERS
+
   Battledome.PlayerOne = {};
   Battledome.PlayerTwo = {};
 
-
-
-  //Players select robot//
+  //PLAYERS SELECT ROBOTS//
   //PLAYER ONE BOT SELECT//
   //
   //
@@ -219,10 +197,10 @@ function putWeaponsToDom(){
   }
   Battledome.PlayerOne.name = PlayerOneName;
   $('.selectpicker',$(this).parent()).addClass("hide");
+  $('#player-one-bot-type').addClass("hide");
   $('#player-one-weapon-picker').removeClass("hide");
   $('#player-one-weapon-btn').removeClass("hide");
   $('#player-one-battle-area').append($('.selectpicker',$(this).parent()).val());
-  console.log("playerOne",Battledome.PlayerOne);
   });
 
 //PLAYER TWO BOT SELECT//
@@ -258,11 +236,12 @@ function putWeaponsToDom(){
 
     Battledome.PlayerTwo.name = playerTwoName;
     $('.selectpicker',$(this).parent()).addClass("hide");
+    $('#player-two-bot-type').addClass("hide");
     $('#player-two-weapon-picker').removeClass("hide");
-      $('#player-two-weapon-btn').removeClass("hide");
+    $('#player-two-weapon-btn').removeClass("hide");
     $('#player-two-battle-area').append($('.selectpicker',$(this).parent()).val());
-    console.log("playerTwo",Battledome.PlayerTwo);
   });
+
 //PLAYERS PICK WEAPON//
 //
 //PLAYER ONE WEAPON SELECT///
@@ -321,58 +300,16 @@ function putWeaponsToDom(){
         if (Battledome.PlayerOne.health - Battledome.PlayerTwo.Weapon.damage <= 0) {
               $("#winner-display").append("Player One Died!");
         }
-        //$("#player-one-health").html("Health " + (PlayerOne.health - PlayerTwo.weapon.damage));
       //Player Two//
         Battledome.PlayerTwo.health = (Battledome.PlayerTwo.Robot.totalLife - Battledome.PlayerOne.Weapon.damage);
         if (Battledome.PlayerTwo.health - Battledome.PlayerOne.Weapon.damage <= 0) {
               $("#winner-display").append("Player Two Died!");
         }
-        // else return
-        // $("#player-two-health").html("Health " + (PlayerTwo.health - PlayerOne.weapon.damage));
     });
 });
 
 
 
-
-
-
-
-
-
-
-
-//   this.toString = function() {
-//     var output = [this.playerName,
-//       ": a ",
-//       this.robot,
-//       " with ",
-//       this.health,
-//       " health. ",
-//       " Wielding a ",
-//       this.weapon.toString(),
-//       "!"
-//     ].join("");
-//     return output;
-//   };
-// };
-
-// $("#attack-button").click(function() {
-//       PlayerOne.health = (PlayerOne.health - PlayerTwo.weapon.damage);
-//       if (PlayerOne.health - PlayerTwo.weapon.damage <= 0) {
-//               playerOneDied();
-//       }
-//       $("#player-one-health").html("Health " + (PlayerOne.health - PlayerTwo.weapon.damage));
-//     //Player Two//
-//       PlayerTwo.health = (PlayerTwo.health - PlayerOne.weapon.damage);
-//       if (PlayerTwo.health - PlayerOne.weapon.damage <= 0) {
-//               PlayerTwoDied();
-//       }
-//       $("#player-two-health").html("Health " + (PlayerTwo.health - PlayerOne.weapon.damage));
-//  });
-// function Battleground () {
-
-// }
 
 // A base Robot function. DONE
 // Define three robot type functions (e.g. Drone, Bipedal, ATV). DONE
@@ -385,7 +322,7 @@ function putWeaponsToDom(){
 // Functional Requirements
 
 // When your user interface first loads, provide 2 text inputs to name the two robots that will do battle. DONE
-// You must also provide a select element underneath each text input so that the user can select one of the 6 robot models you defined.
-// Provide a Attack! button that, when clicked, simply applies the damage output of each robot against the other one.
+// You must also provide a select element underneath each text input so that the user can select one of the 6 robot models you defined. DONE
+// Provide a Attack! button that, when clicked, simply applies the damage output of each robot against the other one. DONE
 // Once either robot's health is <0 display a message that the battle is over, and which one won. For example...
-// The Viper Drone defeated the Behemoth ATV with its flamethrower.
+// The Viper Drone defeated the Behemoth ATV with its flamethrower. DONE
