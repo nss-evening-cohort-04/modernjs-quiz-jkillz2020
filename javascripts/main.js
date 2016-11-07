@@ -1,118 +1,17 @@
 "use strict";
+//var Battledome = (function() {
 $(document).ready(function(){
-let Battledome = {};
-let GameOver = false;
+// let Battledome = {};
+//let GameOver = false;
 let PlayerOneAlive = true;
 let PlayerTwoAlive = true;
 
 /*
   ROBOT WARS
  */
-// WEAPONS //
-function Weapon () {
 
-}
 
-function Gun () {
-  this.damage = 1000;
-}
-  Gun.prototype = new Weapon();
 
-function Flamethrower () {
-  this.damage = 4000;
-}
-  Flamethrower.prototype = new Weapon();
-
-function Bubbles () {
-  this.damage = 10000;
-}
-  Bubbles.prototype = new Weapon();
-
-function ThorHammer () {
-  this.damage = 5000;
-}
-  ThorHammer.prototype = new Weapon();
-
-function Lazer () {
-  this.damage = 6500;
-}
-  Lazer.prototype = new Weapon();
-
-function Buzzsaw () {
-  this.damage = 6800;
-}
-  Buzzsaw.prototype = new Weapon();
-
-//BASE ROBOT //
-
-  function Robot () {
-    this.baseDamage = Math.floor(Math.random() * 10);
-    this.life = 15000;
-    this.weapon = null;
-    this.totalLife = 0;
-    this.name = '';
-  }
-//ROBOT HEALTH
-  Robot.prototype.health = function () {
-    this.totalLife = this.life + this.totalLife;
-  };
-
-//ROBOT TYPES//
-
-  function AerialDrone () {
-    this.type = "Drone";
-    this.attackType = "Aerial";
-  }
-  AerialDrone.prototype = new Robot();
-
-  function PredatorDrone () {
-    this.baseDamage += 10;
-    this.totalLife = Math.floor(Math.random() * 10);
-  }
-  PredatorDrone.prototype = new AerialDrone();
-
-  function JetDrone () {
-    this.baseDamage += 20;
-    this.totalLife = Math.floor(Math.random() * 15) + this.life;
-  }
-  JetDrone.prototype = new AerialDrone();
-
-  function GroundRobot () {
-    this.attackType = "Earth Bound";
-  }
-  GroundRobot.prototype = new Robot();
-
-  function TankDrone () {
-    this.type = "Tank";
-    this.baseDamage += 5;
-    this.totalLife = Math.floor(Math.random() * 20) + this.life;
-  }
-  TankDrone.prototype = new GroundRobot();
-
-  function Raptor () {
-    this.type = "FireBreather";
-    this.baseDamage += 200;
-    this.totalLife = Math.floor(Math.random() * 18) + this.life;
-  }
-  Raptor.prototype = new GroundRobot();
-
-  function AtvRobot () {
-    this.attackType = "All Terrain";
-  }
-  AtvRobot.prototype = new Robot();
-
-  function Hulk () {
-    this.baseDamage += 145;
-    this.totalLife = Math.floor(Math.random() * 25) + this.life;
-  }
-  Hulk.prototype = new AtvRobot();
-
-  function BigFoot () {
-    this.baseDamage += 115;
-    BigFoot.weapon = new Buzzsaw();
-    this.totalLife = Math.floor(Math.random() * 30) + this.life;
-  }
-  BigFoot.prototype = new AtvRobot();
     
   ///ROBOT SELECT ELEMENTS////
   function putRobotsToDom(){
@@ -240,6 +139,7 @@ function putWeaponsToDom(){
     $('#player-two-weapon-picker').removeClass("hide");
     $('#player-two-weapon-btn').removeClass("hide");
     $('#player-two-battle-area').append($('.selectpicker',$(this).parent()).val());
+    console.log(Battledome.PlayerTwo);
   });
 
 //PLAYERS PICK WEAPON//
@@ -296,19 +196,19 @@ function putWeaponsToDom(){
     });
 
   $("#attack-button").on('click', function(){
-    Battledome.PlayerOne.health = (Battledome.PlayerOne.Robot.totalLife - Battledome.PlayerTwo.Weapon.damage);
+    Battledome.PlayerOne.health = (Battledome.PlayerOne.Robot.health - Battledome.PlayerTwo.Weapon.damage);
         if (Battledome.PlayerOne.health - Battledome.PlayerTwo.Weapon.damage <= 0) {
               $("#winner-display").append("Player One Died!");
         }
       //Player Two//
-        Battledome.PlayerTwo.health = (Battledome.PlayerTwo.Robot.totalLife - Battledome.PlayerOne.Weapon.damage);
+        Battledome.PlayerTwo.health = (Battledome.PlayerTwo.Robot.health - Battledome.PlayerOne.Weapon.damage);
         if (Battledome.PlayerTwo.health - Battledome.PlayerOne.Weapon.damage <= 0) {
               $("#winner-display").append("Player Two Died!");
         }
     });
 });
 
-
+})(Battledome || {});
 
 
 // A base Robot function. DONE
