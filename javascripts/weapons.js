@@ -1,42 +1,36 @@
-"use strict";
-var Battledome = (function(OldBattledome) {
 
 
-  // WEAPONS //
-  OldBattledome.Weapon = function() {
+// WEAPONS //
+function Weapon () {
 
-  };
+}
 
-  OldBattledome.Gun = function() {
-    this.damage = 1000;
-  };
-    OldBattledome.Gun.prototype = new Weapon();
+function Gun () {
+  this.damage = 1000;
+}
+  Gun.prototype = new Weapon();
 
-  OldBattledome.Flamethrower = function() {
-    this.damage = 4000;
-  };
-    OldBattledome.Flamethrower.prototype = new Weapon();
+function Flamethrower () {
+  this.damage = 4000;
+}
+  Flamethrower.prototype = new Weapon();
 
-  OldBattledome.Bubbles = function() {
-    this.damage = 10000;
-  };
-    OldBattledome.Bubbles.prototype = new Weapon();
+function Bubbles () {
+  this.damage = 10000;
+}
+  Bubbles.prototype = new Weapon();
 
-  OldBattledome.ThorHammer = function() {
-    this.damage = 5000;
-  };
-    OldBattledome.ThorHammer.prototype = new Weapon();
+function ThorHammer () {
+  this.damage = 5000;
+}
+  ThorHammer.prototype = new Weapon();
 
-  OldBattledome.Lazer = function() {
-    this.damage = 6500;
-  };
-    OldBattledome.Lazer.prototype = new Weapon();
+function Lazer () {
+  this.damage = 6500;
+}
+  Lazer.prototype = new Weapon();
 
-  OldBattledome.Buzzsaw = function () {
-    this.damage = 6800;
-  };
-    OldBattledome.Buzzsaw.prototype = new Weapon();
-
-  return OldBattledome;
-
-})(Battledome || {});
+function Buzzsaw () {
+  this.damage = 6800;
+}
+  Buzzsaw.prototype = new Weapon();
