@@ -299,8 +299,9 @@ function putWeaponsToDom(){
   $("#attack-button").on('click', function(){
     let lifeStat = Battledome.PlayerOne.Robot.life -= Battledome.PlayerTwo.Weapon.damage;
     let lifeStat2 = Battledome.PlayerTwo.Robot.life -= Battledome.PlayerOne.Weapon.damage;
+    $("#player-one-health").html("Player 1 Health: "); 
     $("#player-one-health").append(lifeStat);
-    // $("#player-one-health").append(lifeStat);
+    $("#player-two-health").html("Player 2 Health: ");
     $("#player-two-health").append(lifeStat2);
     console.log(Battledome.PlayerOne);
         if (Battledome.PlayerOne.Robot.life <= 0) {
