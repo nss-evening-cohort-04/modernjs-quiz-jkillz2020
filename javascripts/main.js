@@ -53,9 +53,9 @@ function Buzzsaw () {
     this.name = '';
   }
 //ROBOT HEALTH
-  Robot.life = function () {
-    this.life + this.totalLife;
-  };
+  // Robot.life = function () {
+  //   this.life + this.totalLife;
+  // };
 
 //ROBOT TYPES//
 
@@ -297,8 +297,11 @@ function putWeaponsToDom(){
     });
 
   $("#attack-button").on('click', function(){
-    Battledome.PlayerOne.Robot.life -= Battledome.PlayerTwo.Weapon.damage;
-    Battledome.PlayerTwo.Robot.life -= Battledome.PlayerOne.Weapon.damage;
+    let lifeStat = Battledome.PlayerOne.Robot.life -= Battledome.PlayerTwo.Weapon.damage;
+    let lifeStat2 = Battledome.PlayerTwo.Robot.life -= Battledome.PlayerOne.Weapon.damage;
+    $("#player-one-health").append(lifeStat);
+    // $("#player-one-health").append(lifeStat);
+    $("#player-two-health").append(lifeStat2);
     console.log(Battledome.PlayerOne);
         if (Battledome.PlayerOne.Robot.life <= 0) {
               $("#winner-display").append("Player One Died!");
